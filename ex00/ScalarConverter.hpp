@@ -1,3 +1,6 @@
+#ifndef SCALAR_CONVERTER_HPP
+#define SCALAR_CONVERTER_HPP
+
 #include <string>
 #include <sstream>
 #include <iostream>
@@ -6,6 +9,10 @@
 #include <cstdlib>
 
 #define PRECISION 4
+#define FLOAT 0
+#define DOUBLE 1
+#define INT 2
+#define CHAR 3
 
 // Text color codes
 # define RESET		"\033[0m"	// Reset color
@@ -22,6 +29,21 @@ class ScalarConverter{
         static void convert(std::string toConvert);
 
     private:
-        static bool isChar(std::string toCheck);
-        static void printResult(double toPrint);
+    //Orthodox Canonical Form
+        ScalarConverter();
+	    ScalarConverter(const ScalarConverter& src);
+	    ScalarConverter& operator=(const ScalarConverter& src);
+	    virtual ~ScalarConverter();
+        
+        static bool isChar(const std::string &toCheck);
+        static bool isSpecialCase(std::string& toCheck);
+        static bool isFloat(const std::string &ending);
+        static bool isDouble(const std::string &ending);
+        static bool isInt(const std::string &ending);
+        static void printResult(const std::string &toPrint, int type);
+        static void printSpecialCase(const std::string &toPrint);
+        static bool isOverflowing(const std::string &toCheck, int type);
+
 };
+
+#endif

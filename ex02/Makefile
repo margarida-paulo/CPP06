@@ -1,14 +1,14 @@
-NAME = converter
+NAME = random
 
 CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-FILES = ScalarConverter.cpp ScalarConverter.hpp
+FILES = A.hpp B.hpp C.hpp Base.cpp Base.hpp
 
 all: ${NAME}
 
-${NAME}: ScalarConverter.cpp ScalarConverter.hpp
+${NAME}: ${FILES}
 	${CPP} ${FLAGS} ${FILES} main.cpp -o ${NAME}
 
 fclean:

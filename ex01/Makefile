@@ -1,14 +1,14 @@
-NAME = converter
+NAME = serializer
 
 CPP = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-FILES = ScalarConverter.cpp ScalarConverter.hpp
+FILES = Serializer.cpp Serializer.hpp
 
 all: ${NAME}
 
-${NAME}: ScalarConverter.cpp ScalarConverter.hpp
+${NAME}: Serializer.cpp Serializer.hpp
 	${CPP} ${FLAGS} ${FILES} main.cpp -o ${NAME}
 
 fclean:
