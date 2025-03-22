@@ -1,19 +1,36 @@
 NAME = converter
 
-CPP = c++
+CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
-FILES = ScalarConverter.cpp ScalarConverter.hpp
+SRC = ScalarConverter.cpp
 
-all: ${NAME}
+HEADERS = ScalarConverter.hpp
 
-${NAME}: ScalarConverter.cpp ScalarConverter.hpp
-	${CPP} ${FLAGS} ${FILES} main.cpp -o ${NAME}
+MAIN = main.cpp
 
-fclean:
-	rm ${NAME}
+OBJ = $(MAIN:.cpp=.o) $(SRC:.cpp=.o)
+
+all : ${NAME}
+
+${NAME}: ${OBJ}
+	@echo "Compiling into object files"
+	@$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+	@echo "Compiled successfuly!"
+
+%.o: %.cpp ${HEADERS}
+	@echo "Compiling $< into object file"
+	@$(CC) $(FLAGS) -o $@ -c $<
+
+clean:
+	@rm -rf ${OBJ}
+	@echo "Object files deleted."
+
+fclean : clean
+	@rm -rf ${NAME}
+	@echo "Executable deleted."
 
 re:
-	make fclean
-	make
+	@make fclean
+	@make
